@@ -20,7 +20,7 @@ exports.sourceNodes = async (
     params,
     concurrentFileRequests,
   } = pluginOptions
-  const { createNode } = actions
+  const { createNode, touchNode } = actions
   const drupalFetchActivity = reporter.activityTimer(`Fetch data from Drupal`)
 
   // Default apiBase to `jsonapi`
@@ -30,9 +30,9 @@ exports.sourceNodes = async (
   concurrentFileRequests = concurrentFileRequests || 20
 
   // Touch existing Drupal nodes so Gatsby doesn't garbage collect them.
-  // _.values(store.getState().nodes)
-  // .filter(n => n.internal.type.slice(0, 8) === `drupal__`)
-  // .forEach(n => touchNode({ nodeId: n.id }))
+  Array.from(store.getState().nodes.values())
+    .filter(n => n.internal.owner === `gatsby-source-drupal`)
+    .forEach(n => touchNode({ nodeId: n.id }))
 
   // Fetch articles.
   // console.time(`fetch Drupal data`)
@@ -50,11 +50,17 @@ exports.sourceNodes = async (
 
   drupalFetchActivity.start()
 
-  const data = await axios.get(`${baseUrl}/${apiBase}`, {
-    auth: basicAuth,
-    headers,
-    params,
-  })
+  try {
+    const data = await axios.get(`${baseUrl}/${apiBase}`, {
+      auth: basicAuth,
+      headers,
+      params,
+    })
+  } catch (e) {
+    drupalFetchActivity.end()
+    throw e
+  }
+
   const allData = await Promise.all(
     _.map(data.data.links, async (url, type) => {
       if (type === `self`) return
