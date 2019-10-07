@@ -1,11 +1,8 @@
 {
-  "name": "gatsby-source-drupal",
+  "name": "@denis.babineau.sg/gatsby-source-drupal",
   "description": "Gatsby source plugin for building websites using the Drupal CMS as a data source",
-  "version": "3.2.34",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
-  },
+  "version": "3.2.34-0",
+  "author": "Denis Babineau <denis.babineau@scientificgames.com>",
   "dependencies": {
     "@babel/runtime": "^7.6.2",
     "axios": "^0.19.0",
@@ -21,7 +18,7 @@
     "babel-preset-gatsby-package": "^0.2.7",
     "cross-env": "^5.2.1"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-drupal#readme",
+  "homepage": "https://github.com/denisbabineau/gatsby/tree/master/packages/gatsby-source-drupal#readme",
   "keywords": [
     "gatsby",
     "gatsby-plugin",
@@ -33,7 +30,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby.git",
+    "url": "https://github.com/denisbabineau/gatsby.git",
     "directory": "packages/gatsby-source-drupal"
   },
   "scripts": {
