@@ -31,7 +31,7 @@ exports.sourceNodes = async (
 
   // Touch existing Drupal nodes so Gatsby doesn't garbage collect them.
   Array.from(store.getState().nodes.values())
-    .filter(n => n.internal.owner === `gatsby-source-drupal`)
+    .filter(n => n.internal.owner === cache.name)
     .forEach(n => touchNode({ nodeId: n.id }))
 
   // Fetch articles.
