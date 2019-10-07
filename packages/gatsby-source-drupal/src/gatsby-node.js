@@ -50,8 +50,9 @@ exports.sourceNodes = async (
 
   drupalFetchActivity.start()
 
+  let data;
   try {
-    const data = await axios.get(`${baseUrl}/${apiBase}`, {
+    data = await axios.get(`${baseUrl}/${apiBase}`, {
       auth: basicAuth,
       headers,
       params,
